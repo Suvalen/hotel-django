@@ -1,0 +1,55 @@
+{% extends 'admin_lte/base.html' %}
+{% block content %}
+<div class="main-panel">
+    <div class="content-wrapper">
+      <div class="col-lg-12 grid-margin stretch-card">
+        <div class="card">
+          <div class="card-body">
+<div class="container mt-4">
+    <h3>🧠 Guest Clustering Results</h3>
+
+    {% if graph_html %}
+    <div class="card mb-4">
+        <div class="card-body">
+            {{ graph_html|safe }}
+        </div>
+    </div>
+    {% endif %}
+
+    <h5>📊 Cluster Summary</h5>
+    <table class="table table-bordered table-striped">
+        <thead class="table-light">
+            <tr>
+                <th>Cluster</th>
+                <th>Guests</th>
+                <th>Avg Age</th>
+                <th>Avg Visit</th>
+                <th>Avg Nights</th>
+                <th>Room Spend ($)</th>
+                <th>Add-On Spend ($)</th>
+                <th>Avg Rating</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for row in summary %}
+            <tr>
+                <td><strong>{{ row.Cluster }}</strong></td>
+                <td>{{ row.Guest Count }}</td>
+                <td>{{ row.Age }}</td>
+                <td>{{ row.Visit Count }}</td>
+                <td>{{ row.Avg Nights per Stay }}</td>
+                <td>${{ row.Total Spent (Room)|floatformat:2 }}</td>
+                <td>${{ row.Total Spent (Add-Ons)|floatformat:2 }}</td>
+                <td>{{ row.Rating Given }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% block content %}
+<!-- start of breadcumb-section -->
+<div class="wpo-breadcumb-area">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="wpo-breadcumb-wrap">
+                    <h2>Cart</h2>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><span>Cart</span></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end of wpo-breadcumb-section-->
+<div class="col-lg-5 col-12">
+        <div class="room-sidebar p-4 shadow rounded bg-light">
+<div class="container mt-5">
+  <h3>🧾 Invoice #{{ invoice.id }}</h3>
+  <p><strong>Name:</strong> {{ invoice.billing_name }}</p>
+  <p><strong>Email:</strong> {{ invoice.billing_email }}</p>
+  <p><strong>Address:</strong> {{ invoice.billing_address }}</p>
+  <p><strong>Total Paid:</strong> $ {{ invoice.total_amount }}</p>
+  <p><strong>Method:</strong> {{ invoice.payment_method }}</p>
+  {% if invoice.card_last_digits %}
+    <p><strong>Card Ending:</strong> **** {{ invoice.card_last_digits }}</p>
+  {% endif %}
+  <a href="{% url 'home' %}" class="btn btn-success mt-3">Back to Home</a>
+  <button onclick="window.print()" class="btn btn-success mt-3">
+    🖨️ Print Invoice
+  </button>
+  <a href="{% url 'invoice-download' invoice.pk %}" class="btn btn-success mt-3">
+    ⬇️ Download PDF
+  </a>
+  
+</div>
+</div>
+</div>
+{% endblock %}

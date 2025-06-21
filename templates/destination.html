@@ -1,0 +1,100 @@
+{% extends "base.html" %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+    {% block content %}
+        <!-- start of breadcumb-section -->
+        <div class="wpo-breadcumb-area">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="wpo-breadcumb-wrap">
+                            <h2>Destinations</h2>
+                            <ul>
+                                <li><a href="index.html">Home</a></li>
+                                <li><span>Destinations</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- end of wpo-breadcumb-section-->
+        <!-- wpo-destination-area-start -->
+        <div class="wpo-destination-area pt-120">
+            <div class="container">
+                <div class="destination-wrap">
+                    <div class="row">
+                        {% for d in destinations %}
+                        <div class="col-lg-4 col-md-6 col-12">
+                            <div class="destination-item">
+                                <div class="destination-img">
+                                    {% if d.image %}
+                                        <img src="{{ d.image.url }}" alt="{{ d.name }}">
+                                    {% else %}
+                                        <img src="{% static 'parador/images/destination/default.jpg' %}" alt="Default">
+                                    {% endif %}
+                                </div>
+                                <div class="destination-content">
+                                    <span class="sub">{{ d.location }}</span>
+                                    <h2>{{ d.name }}</h2>
+                                    <div class="destination-bottom">
+                                        <p>{{ d.distance_km }} km from hotel</p>
+                                        <div class="destination-bottom-right">
+                                            <ul>
+                                                <li><i class="fa fa-star" aria-hidden="true"></i></li>
+                                                <li><i class="fa fa-star" aria-hidden="true"></i></li>
+                                                <li><i class="fa fa-star" aria-hidden="true"></i></li>
+                                                <li><i class="fa fa-star" aria-hidden="true"></i></li>
+                                                <li><span><i class="fa fa-star" aria-hidden="true"></i></span></li>
+                                            </ul>
+                                            <small>4.5</small>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {% empty %}
+                        <div class="col-12"><p>No destinations available.</p></div>
+                        {% endfor %}
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+        <!-- .Destination-area-start -->
+        <!-- start wpo-newslatter-section -->
+        <section class="wpo-newslatter-section section-bg section-padding">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-xl-7">
+                        <div class="wpo-section-title-s2">
+                            <h2>Subscribe & Get Special Discount!</h2>
+                            <p>Don’t Wanna Miss Somethings? Subscribe Right Now And Get The Special 
+                                Discount And Monthly Newsletter.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="wpo-newsletter">
+                    <div class="newsletter-form">
+                        <form>
+                            <input type="email" class="form-control"
+                                placeholder="Enter Your Email Address..." required>
+                                <button type="submit">Subscribe</button>
+                        </form>
+                    </div>
+                </div>
+            </div> <!-- end container -->
+            <div class="n-shape">
+                <img src="assets/images/nshape1.png" alt="">
+            </div>
+            <div class="n-shape2">
+                <img src="assets/images/nshape2.png" alt="">
+            </div>
+        </section>
+        <!-- end wpo-newslatter-section -->
+    {% endblock %}
+
+</body>
+
+</html>

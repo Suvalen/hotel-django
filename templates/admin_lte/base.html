@@ -1,0 +1,49 @@
+<!-- templates/base.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>{% block title %}Corona Admin{% endblock %}</title>
+  {% load static %}
+  <link rel="stylesheet" href="{% static 'admin_lte/vendors/mdi/css/materialdesignicons.min.css' %}">
+  <link rel="stylesheet" href="{% static 'admin_lte/vendors/ti-icons/css/themify-icons.css' %}">
+  <link rel="stylesheet" href="{% static 'admin_lte/vendors/css/vendor.bundle.base.css' %}">
+  <link rel="stylesheet" href="{% static 'admin_lte/vendors/font-awesome/css/font-awesome.min.css' %}">
+  <link rel="stylesheet" href="{% static 'admin_lte/vendors/jvectormap/jquery-jvectormap.css' %}">
+  <link rel="stylesheet" href="{% static 'admin_lte/vendors/flag-icon-css/css/flag-icons.min.css' %}">
+  <link rel="stylesheet" href="{% static 'admin_lte/vendors/owl-carousel-2/owl.carousel.min.css' %}">
+  <link rel="stylesheet" href="{% static 'admin_lte/vendors/owl-carousel-2/owl.theme.default.min.css' %}">
+  <link rel="stylesheet" href="{% static 'admin_lte/css/style.css' %}">
+  <link rel="shortcut icon" href="{% static 'admin_lte/images/favicon.png' %}" />
+</head>
+<body>
+  <div class="container-scroller">
+    {% include 'admin_lte/partials/_navbar.html' %}
+    {% include 'admin_lte/partials/_sidebar.html' %}
+    <div class="container-fluid page-body-wrapper">
+      <div class="main-panel">    
+        <div class="content-wrapper">
+          {% block content %}{% endblock %}
+        </div>
+        {% include 'admin_lte/partials/_footer.html' %}
+      </div>
+    </div>
+  </div>
+
+  <!-- JS Scripts -->
+  <script src="{% static 'admin_lte/vendors/js/vendor.bundle.base.js' %}"></script>
+  <script src="{% static 'admin_lte/vendors/chart.js/chart.umd.js' %}"></script>
+  <script src="{% static 'admin_lte/vendors/progressbar.js/progressbar.min.js' %}"></script>
+  <script src="{% static 'admin_lte/vendors/jvectormap/jquery-jvectormap.min.js' %}"></script>
+  <script src="{% static 'admin_lte/vendors/jvectormap/jquery-jvectormap-world-mill-en.js' %}"></script>
+  <script src="{% static 'admin_lte/vendors/owl-carousel-2/owl.carousel.min.js' %}"></script>
+  <script src="{% static 'admin_lte/js/jquery.cookie.js' %}"></script>
+  <script src="{% static 'admin_lte/js/off-canvas.js' %}"></script>
+  <script src="{% static 'admin_lte/js/misc.js' %}"></script>
+  <script src="{% static 'admin_lte/js/settings.js' %}"></script>
+  <script src="{% static 'admin_lte/js/todolist.js' %}"></script>
+  <script src="{% static 'admin_lte/js/proBanner.js' %}"></script>
+  <script src="{% static 'admin_lte/js/dashboard.js' %}"></script>
+</body>
+</html>

@@ -1,0 +1,41 @@
+{% extends 'admin_lte/base.html' %}
+{% block content %}
+<div class="main-panel">
+    <div class="content-wrapper">
+      <div class="col-lg-12 grid-margin stretch-card">
+<div class="container mt-4">
+    <h2 class="mb-3">📝 Feedback List</h2>
+    <a href="{% url 'feedback-create' %}" class="btn btn-primary mb-3">Add Feedback</a>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Guest</th>
+                <th>Room</th>
+                <th>Rating</th>
+                <th>Comment</th>
+                <th>Date</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for f in feedbacks %}
+            <tr>
+                <td>{{ f.user.username }}</td>
+                <td>{{ f.room.number }}</td>
+                <td>{{ f.rating }}★</td>
+                <td>{{ f.comment }}</td>
+                <td>{{ f.date|date:"Y-m-d H:i" }}</td>
+                <td>
+                    <a href="{% url 'feedback-edit' f.pk %}" class="btn btn-sm btn-warning">Edit</a>
+                    <a href="{% url 'feedback-delete' f.pk %}" class="btn btn-sm btn-danger">Delete</a>
+                </td>
+            </tr>
+            {% empty %}
+            <tr><td colspan="6">No feedbacks yet.</td></tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+</div>
+</div>
+{% endblock %}

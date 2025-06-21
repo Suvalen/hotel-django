@@ -1,0 +1,44 @@
+{% load static %}
+<!-- Include Select2 CSS if used -->
+<link rel="stylesheet" href="{% static 'admin_lte/vendors/select2/select2.min.css' %}">
+<link rel="stylesheet" href="{% static 'admin_lte/vendors/select2-bootstrap-theme/select2-bootstrap.min.css' %}">
+<div class="row">
+  <div class="col-md-6 grid-margin stretch-card">
+    <div class="card">
+      <div class="card-body">
+        <h4 class="card-title">{{ form_title|default:"Form" }}</h4>
+        <p class="card-description"> {{ form_description|default:"Basic form layout" }} </p>
+
+        <form method="post" class="forms-sample">
+          {% csrf_token %}
+          {% for field in form %}
+            <div class="form-group">
+              <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+              {{ field }}
+              {% if field.help_text %}
+                <small class="form-text text-muted">{{ field.help_text }}</small>
+              {% endif %}
+              {% for error in field.errors %}
+                <div class="text-danger small">{{ error }}</div>
+              {% endfor %}
+            </div>
+          {% endfor %}
+
+          <div class="form-check form-check-flat form-check-primary">
+            <label class="form-check-label">
+              <input type="checkbox" class="form-check-input"> Remember me
+            </label>
+          </div>
+
+          <button type="submit" class="btn btn-primary me-2">Submit</button>
+          <a href="{{ cancel_url|default:'#' }}" class="btn btn-dark">Cancel</a>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="{% static 'admin_lte/vendors/select2/select2.min.js' %}"></script>
+<script src="{% static 'admin_lte/vendors/typeahead.js/typeahead.bundle.min.js' %}"></script>
+<script src="{% static 'admin_lte/js/file-upload.js' %}"></script>
+<script src="{% static 'admin_lte/js/typeahead.js' %}"></script>
+<script src="{% static 'admin_lte/js/select2.js' %}"></script>

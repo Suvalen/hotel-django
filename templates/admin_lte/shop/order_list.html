@@ -1,0 +1,46 @@
+{% extends 'admin_lte/base.html' %}
+{% block content %}
+<div class="main-panel">
+  <div class="content-wrapper">
+    <div class="col-lg-12 grid-margin stretch-card">
+      <div class="card">
+        <div class="card-body">
+<h2>Product Orders</h2>
+<a href="{% url 'order-add' %}" class="btn btn-primary mb-3">+ Add Order</a>
+
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Reservation</th>
+      <th>Product</th>
+      <th>Quantity</th>
+      <th>Total Price</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for order in orders %}
+    <tr>
+      <td>{{ order.id }}</td>
+      <td>{{ order.user.username }}</td>
+      <td>{{ order.produk.nama_produk }}</td>
+      <td>{{ order.jumlah }}</td>
+      <td>{{ order.total_harga }}</td>
+        <td>
+            <a href="{% url 'order-edit' order.id %}" class="btn btn-sm btn-warning">Edit</a>
+            <a href="{% url 'order-delete' order.id %}" class="btn btn-sm btn-danger">Delete</a>
+          </td>
+          
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+
+{% endblock %}

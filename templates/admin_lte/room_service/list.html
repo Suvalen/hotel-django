@@ -1,0 +1,36 @@
+{% extends 'admin_lte/base.html' %}
+{% block content %}
+<div class="container">
+  <h2>Room Service Requests</h2>
+  <a href="{% url 'roomservice-create' %}" class="btn btn-primary mb-3">+ New Request</a>
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>Guest</th>
+        <th>Room</th>
+        <th>Service</th>
+        <th>Date</th>
+        <th>Fulfilled</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for request in requests %}
+      <tr>
+        <td>{{ request.guest }}</td>
+        <td>{{ request.room }}</td>
+        <td>{{ request.get_service_type_display }}</td>
+        <td>{{ request.requested_at }}</td>
+        <td>{{ request.fulfilled }}</td>
+        <td>
+          <a href="{% url 'roomservice-update' request.id %}" class="btn btn-sm btn-warning">Edit</a>
+          <a href="{% url 'roomservice-delete' request.id %}" class="btn btn-sm btn-danger">Delete</a>
+        </td>
+      </tr>
+      {% empty %}
+      <tr><td colspan="6">No service requests yet.</td></tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}

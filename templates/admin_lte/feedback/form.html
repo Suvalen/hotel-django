@@ -1,0 +1,15 @@
+{% extends 'admin_lte/base.html' %}
+{% block content %}
+<div class="main-panel">
+    <div class="content-wrapper">
+<div class="container mt-4">
+    <h2>{{ view.object.pk|yesno:"Edit Feedback,Add Feedback" }}</h2>
+    <form method="post">{% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-success">Save</button>
+        <a href="{% url 'feedback-list' %}" class="btn btn-secondary">Cancel</a>
+    </form>
+</div>
+</div>
+</div>
+{% endblock %}

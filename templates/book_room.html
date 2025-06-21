@@ -1,0 +1,105 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Book {{ room.room_type|title }} Room{% endblock %}
+
+{% block content %}
+
+<!-- start of breadcrumb -->
+<div class="wpo-breadcumb-area">
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <div class="wpo-breadcumb-wrap">
+          <h2>Room</h2>
+          <ul>
+            <li><a href="{% url 'home' %}">Home</a></li>
+            <li><span>Room</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- end of breadcrumb -->
+
+<!-- start room section -->
+<section class="wpo-shop-single-section section-padding">
+  <div class="container">
+    <div class="row">
+
+      <!-- Left: Room Details -->
+      <div class="col-lg-7 col-12">
+        <div class="room-preview mb-4">
+          <div class="room-preview mb-4">
+            {% if room_obj.image %}
+  <img src="{{ room_obj.image.url }}" alt="{{ room_obj.get_room_type_display }}" class="img-fluid">
+{% else %}
+  <img src="{% static 'room_images/'|add:room_obj.room_type|add:'.jpg' %}" alt="{{ room_obj.get_room_type_display }}" class="img-fluid">
+{% endif %}
+
+          </div>
+          
+        </div>
+
+        <div class="product-details">
+          <h2>{{ room.room_type|title }} Room</h2>
+          <div class="product-rt mb-2">
+            <div class="rating">
+              <i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i>
+              <i class="fa fa-star"></i><i class="fa fa-star-o"></i>
+            </div>
+            <span>(Based on availability)</span>
+          </div>
+
+          <div class="price mb-3">
+            <span class="current text-danger">${{ room.price }}</span>
+          </div>
+
+          <p>{{ room.description }}</p>
+
+          <ul class="mb-3">
+            {% for feature in room.features %}
+              <li>• {{ feature }}</li>
+            {% endfor %}
+          </ul>
+
+          {% if request.session.user_id and room_obj.id %}
+          <a href="{% url 'submit-review' room_obj.id %}" class="btn btn-primary">
+            📝 Leave a Review
+          </a>
+          {% endif %}
+        </div>
+      </div>
+
+      <!-- Right: Booking Form -->
+      <div class="col-lg-5 col-12">
+        <div class="room-sidebar p-4 shadow rounded bg-light">
+          <h4 class="mb-3">Book the {{ room.room_type|title }} Room</h4>
+          <form method="post">
+            {% csrf_token %}
+
+            <h5>Guest Info</h5>
+            {{ guest_form.as_p }}
+
+            <h5>Reservation Info</h5>
+            <div class="input-group mb-2">
+              <input type="text" id="datepicker" name="check_in" class="form-control" placeholder="Check-in" autocomplete="off">
+              <i class="fi flaticon-calendar"></i>
+            </div>
+            <div class="input-group mb-3">
+              <input type="text" id="datepicker2" name="check_out" class="form-control" placeholder="Check-out" autocomplete="off">
+              <i class="fi flaticon-calendar"></i>
+            </div>
+
+            <button type="submit" class="btn btn-success w-100">Confirm Booking</button>
+          </form>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+<!-- end room section -->
+
+{% endblock %}

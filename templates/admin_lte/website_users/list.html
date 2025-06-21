@@ -1,0 +1,34 @@
+{% extends 'admin_lte/base.html' %}
+{% block content %}
+<div class="main-panel">
+    <div class="content-wrapper">
+<div class="container mt-4">
+  <h2>Website Users</h2>
+  <div class="table-responsive">
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Username</th>
+        <th>Email</th>
+        <th>Role</th>
+        <th>Last Login</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for user in users %}
+      <tr>
+        <td>{{ user.id }}</td>
+        <td>{{ user.username }}</td>
+        <td>{{ user.email }}</td>
+        <td>{{ user.password }}</td>
+        <td>{{ user.last_login|default:'-' }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+</div>
+</div>
+</div>
+{% endblock %}

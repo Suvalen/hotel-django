@@ -1,0 +1,62 @@
+{% extends 'admin_lte/base.html' %}
+{% block content %}
+<div class="main-panel">
+    <div class="content-wrapper">
+      <div class="col-lg-12 grid-margin stretch-card">
+        <div class="card">
+<div class="container-fluid">
+    <h1 class="mt-4">Occupancy Snapshot</h1>
+    <div class="card mt-3">
+        <div class="card-body">
+            <a href="{% url 'generate-occupancy-snapshot' %}" class="btn btn-success mb-3">
+                <i class="fas fa-plus-circle"></i> Generate Today’s Snapshot
+            </a>
+            {% if messages %}
+  {% for message in messages %}
+    <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+      {{ message }}
+      <button type="button" class="close" data-dismiss="alert">&times;</button>
+    </div>
+  {% endfor %}
+{% endif %}
+
+            
+            <table class="table table-bordered table-hover">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>Date</th>
+                        <th>Occupied</th>
+                        <th>Available</th>
+                        <th>Maintenance</th>
+                        <th>Occupancy Rate (%)</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for snapshot in snapshots %}
+                    <tr>
+                        <td>{{ snapshot.date }}</td>
+                        <td>{{ snapshot.occupied_rooms }}</td>
+                        <td>{{ snapshot.available_rooms }}</td>
+                        <td>{{ snapshot.maintenance_rooms }}</td>
+                        <td>{{ snapshot.occupancy_rate }}</td>
+                        <td>
+                            <a href="{% url 'delete-occupancy-snapshot' snapshot.pk %}" class="btn btn-sm btn-danger float-right ml-2">
+                                <i class="fas fa-trash-alt"></i> Delete
+                            </a>
+                        </td>
+                        
+                    </tr>
+                    {% empty %}
+                    <tr><td colspan="5">No snapshots available.</td></tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+</div>
+</div>
+</div>
+</div>
+{% endblock %}

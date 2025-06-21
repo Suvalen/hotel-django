@@ -1,0 +1,189 @@
+{% extends "admin_lte/base.html" %} 
+{% block title %}Dashboard{% endblock %}
+{% block content %}
+        <!-- partial -->
+        <div class="main-panel">
+            <div class="content-wrapper">
+              <div class="row">
+                <div class="col-xl-3 col-sm-6 grid-margin stretch-card">
+                  <div class="card">
+                    <div class="card-body">
+                      <div class="row">
+                        <div class="col-9">
+                          <div class="d-flex align-items-center align-self-start">
+                            <h3 class="mb-0" id="totalSalesValue">$0.00</h3>
+
+                            
+                          </div>
+                        </div>
+                        <div class="col-3">
+                          <div class="icon icon-box-success ">
+                            <span class="mdi mdi-arrow-top-right icon-item"></span>
+                          </div>
+                        </div>
+                      </div>
+                      <h6 class="text-muted font-weight-normal">Total Revenue</h6>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-xl-3 col-sm-6 grid-margin stretch-card">
+  <div class="card">
+    <div class="card-body">
+      <div class="row">
+        <div class="col-9">
+          <div class="d-flex align-items-center align-self-start">
+            <h3 class="mb-0">${{ total_receivables|floatformat:2 }}</h3>
+          </div>
+        </div>
+        <div class="col-3">
+          <div class="icon icon-box-warning">
+            <span class="mdi mdi-currency-usd icon-item"></span>
+          </div>
+        </div>
+      </div>
+      <h6 class="text-muted font-weight-normal">Total Receivables</h6>
+    </div>
+  </div>
+</div>
+<div class="col-xl-3 col-sm-6 grid-margin stretch-card">
+  <div class="card">
+    <div class="card-body">
+      <div class="row">
+        <div class="col-9">
+          <div class="d-flex align-items-center align-self-start">
+            <h3 class="mb-0">{{ total_reservations|floatformat:2 }}</h3>
+          </div>
+        </div>
+        <div class="col-3">
+          <div class="icon icon-box-warning">
+            <span class="mdi mdi-account-multiple"></span>
+          </div>
+        </div>
+      </div>
+      <h6 class="text-muted font-weight-normal">Total reservation</h6>
+    </div>
+  </div>
+</div>
+              <div class="row">
+                <div class="col-12">
+                  <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">Payments Over the Past 30  Days</h4>
+                        <div id="paymentChart" style="height: 300px;"></div>
+                      </div>
+                    </div>
+                    </div>
+                 </div>
+            </div>
+        </div>
+        <div id="guest-table-container"></div>
+        <div class="row">
+          <div class="col-12">
+            <div class="card">
+              <div class="card-body">
+                <h4 class="card-title">📊 Room Occupancy (Past 7 Days)</h4>
+                <div id="occupancyChart" style="height: 300px;"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+
+
+              
+
+            <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+<script>
+  fetch("{% url 'payment-chart-data' %}")
+    .then(response => response.json())
+    .then(data => {
+      const options = {
+        chart: {
+          type: 'bar',
+          height: 300,
+          toolbar: { show: true },
+          zoom: { enabled: false }
+        },
+        plotOptions: {
+          bar: {
+            horizontal: false,
+            columnWidth: '60%'
+          }
+        },
+        dataLabels: {
+          enabled: false
+        },
+        series: [{
+          name: 'Payments',
+          data: data.totals
+        }],
+        xaxis: {
+          categories: data.labels,
+          labels: {
+            rotate: -45,
+            style: {
+              colors: '#ffffff',        // ✅ white text
+              fontSize: '13px',         // ✅ slightly larger
+              fontFamily: 'inherit'
+            }
+          }
+        },
+        tooltip: {
+            theme: 'dark'
+          },
+        colors: ['#00E396']
+      };
+
+      const chart = new ApexCharts(document.querySelector("#paymentChart"), options);
+      chart.render();
+    });
+
+    fetch("{% url 'total-sales-api' %}")
+    .then(response => response.json())
+    .then(data => {
+      document.getElementById("totalSalesValue").textContent = `$${data.total_sales.toFixed(2)}`;
+    });
+
+</script>
+<script>
+  fetch("{% url 'occupancy-chart-data' %}")
+    .then(response => response.json())
+    .then(data => {
+      const options = {
+        chart: {
+          type: 'bar',
+          height: 300
+        },
+        series: [{
+          name: 'Rooms',
+          data: data.values
+        }],
+        xaxis: {
+          categories: data.labels,
+          labels: {
+            style: {
+              colors: '#ffffff',
+              fontSize: '14px'
+            }
+          }
+        },
+        tooltip: { theme: 'dark' },
+        colors: ['#00E396', '#0090FF', '#FF4560'],
+        plotOptions: {
+          bar: {
+            horizontal: false,
+            columnWidth: '50%'
+          }
+        },
+        dataLabels: {
+          enabled: true
+        }
+      };
+
+      const chart = new ApexCharts(document.querySelector("#occupancyChart"), options);
+      chart.render();
+    });
+</script>
+
+
+{% endblock %}

@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<h2>Available Rooms</h2>
+
+{% if available_rooms %}
+  <div class="row">
+    {% for room in available_rooms %}
+    <div class="col-md-4 mb-4">
+      <div class="card">
+
+        {% if room.image %}
+          <img src="{{ room.image.url }}" class="card-img-top" alt="Room Image">
+        {% else %}
+          <img src="{{ room.image_url }}" class="card-img-top" alt="Room Image">
+        {% endif %}
+
+        <div class="card-body">
+          <h5 class="card-title">{{ room.get_room_type_display }}</h5>
+          <p>Room #: <strong>{{ room.number }}</strong></p>
+          <p>Price: ${{ room.price }}</p>
+          <p>Status: {{ room.get_status_display }}</p>
+
+          <!-- ✅ Book Now Button -->
+          <a href="{% url 'book-room' room.room_type %}?checkin={{ checkin }}&checkout={{ checkout }}" class="btn btn-primary">Book Now</a>
+
+
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+{% else %}
+  <p>No rooms available for your selected dates and type.</p>
+{% endif %}
+{% endblock %}

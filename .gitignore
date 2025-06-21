@@ -1,0 +1,11 @@
+*.pyc
+__pycache__/
+.env
+*.log
+*.sqlite3
+media/
+staticfiles/
+venv/
+*.DS_Store
+.idea/
+/testinggrounds/

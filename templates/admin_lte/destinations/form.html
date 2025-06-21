@@ -1,0 +1,21 @@
+{% extends 'admin_lte/base.html' %}
+{% block content %}
+<div class="main-panel">
+    <div class="content-wrapper">
+  <div class="card">
+    <div class="card-header">
+      <h3 class="card-title">
+<div class="container">
+    <h2>{{ action }} Destination</h2>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-success">{{ action }}</button>
+        <a href="{% url 'destination-dashboard' %}" class="btn btn-secondary">Cancel</a>
+    </form>
+</div>
+</div>
+</div>
+</div>
+</div>
+{% endblock %}

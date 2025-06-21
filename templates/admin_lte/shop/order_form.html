@@ -1,0 +1,15 @@
+{% extends 'admin_lte/base.html' %}
+{% block content %}
+<div class="main-panel">
+    <div class="content-wrapper">
+<h2>Add Product Order</h2>
+
+<form method="post">
+  {% csrf_token %}
+  {{ form.as_p }}
+  <button type="submit" class="btn btn-success">Submit Order</button>
+  <a href="{% url 'order-list' %}" class="btn btn-secondary">Cancel</a>
+</form>
+</div>
+</div>
+{% endblock %}

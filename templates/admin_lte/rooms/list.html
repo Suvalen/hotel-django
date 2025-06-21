@@ -1,0 +1,67 @@
+{% extends 'admin_lte/base.html' %}
+{% load static %}
+{% block content %}
+<div class="main-panel">
+  <div class="content-wrapper">
+    <div class="col-lg-12 grid-margin stretch-card">
+      <div class="card">
+        <div class="card-body">
+          <h2>Rooms</h2>
+          <a href="{% url 'room-add' %}" class="btn btn-primary mb-3">+ Add Room</a>
+          
+          <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Image</th>
+                <th>Number</th>
+                <th>Type</th>
+                <th>Price</th>
+                <th>Status</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for room in rooms %}
+              <tr>
+                <td>{{ forloop.counter }}</td>
+                <td>
+                  <!-- Always show the static image for this room’s type -->
+                  <img src="{{ room.image_url }}"
+                  width="120"
+                  height="80"
+                  style="object-fit: cover; border-radius: 8px;"
+                  alt="{{ room.get_room_type_display }}">
+                </td>
+                <td>{{ room.number }}</td>
+                <td>{{ room.get_room_type_display }}</td>
+                <td>${{ room.price }}</td>
+                <td>
+                  {% if room.status == 'available' %}
+                    <span class="badge badge-success">Available</span>
+                  {% elif room.status == 'occupied' %}
+                    <span class="badge badge-warning">Occupied</span>
+                  {% else %}
+                    <span class="badge badge-secondary">Maintenance</span>
+                  {% endif %}
+                </td>
+                <td>
+                  <a href="{% url 'room-edit' room.pk %}" class="btn btn-sm btn-info">Edit</a>
+                  <a href="{% url 'room-delete' room.pk %}" class="btn btn-sm btn-danger">Delete</a>
+                </td>
+              </tr>
+              {% empty %}
+              <tr>
+                <td colspan="7" class="text-center text-muted">
+                  No rooms found. <a href="{% url 'room-add' %}">Add one now.</a>
+                </td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

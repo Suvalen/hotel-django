@@ -1,0 +1,121 @@
+{% extends "base.html" %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+    {% block content %}
+        <!-- start of breadcumb-section -->
+        <div class="wpo-breadcumb-area">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="wpo-breadcumb-wrap">
+                            <h2>Shop</h2>
+                            <ul>
+                                <li><a href="index.html">Home</a></li>
+                                <li><span>Shop</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- end of wpo-breadcumb-section-->
+
+        <!-- start wpo-shop-section -->
+<section class="wpo-shop-section section-padding">
+    <div class="container">
+        <div class="row">
+            <div class="col col-xs-12">
+                <div class="shop-grids clearfix">
+                    {% for product in products %}
+                    <div class="grid">
+                        <div class="img-holder">
+                            {% if product.gambar %}
+                                <img src="{{ product.gambar.url }}" alt="{{ product.nama_produk }}">
+                            {% else %}
+                                <img src="{% static 'parador/images/shop/default.jpg' %}" alt="Default Product">
+                            {% endif %}
+                        </div>
+                        <div class="details">
+                            <h3><a href="#">{{ product.nama_produk }}</a></h3>
+                            <del></del><span>${{ product.harga }}</span>
+
+                            <!-- ✅ Add working order form here -->
+                            <form method="post" action="{% url 'order-product' product.id %}">
+                                {% csrf_token %}
+                                <input type="hidden" name="produk_id" value="{{ product.id }}">
+                                <input type="number" name="jumlah" min="1" value="1" class="form-control" style="width: 60px; display:inline-block;">
+
+                                <div class="add-to-cart">
+                                    <button type="submit" class="btn btn-sm btn-outline-danger">
+                                        Add to cart <i class="ti-shopping-cart"></i>
+                                      </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+                        </div>
+                        
+                        <div class="pagination-wrapper pagination-wrapper-center">
+                            <ul class="pg-pagination">
+                                <li>
+                                    <a href="#" aria-label="Previous">
+                                        <i class="ti-angle-left"></i>
+                                    </a>
+                                </li>
+                                <li class="active"><a href="#">1</a></li>
+                                <li><a href="#">2</a></li>
+                                <li><a href="#">3</a></li>
+                                <li>
+                                    <a href="#" aria-label="Next">
+                                        <i class="ti-angle-right"></i>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>                        
+                    </div>
+                </div>
+            </div> <!-- end container -->
+        </section>
+        <!-- end wpo-shop-section -->
+
+
+        <!-- start wpo-newslatter-section -->
+        <section class="wpo-newslatter-section section-bg section-padding">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-xl-7">
+                        <div class="wpo-section-title-s2">
+                            <h2>Subscribe & Get Special Discount!</h2>
+                            <p>Don’t Wanna Miss Somethings? Subscribe Right Now And Get The Special 
+                                Discount And Monthly Newsletter.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="wpo-newsletter">
+                    <div class="newsletter-form">
+                        <form>
+                            <input type="email" class="form-control"
+                                placeholder="Enter Your Email Address..." required>
+                                <button type="submit">Subscribe</button>
+                        </form>
+                    </div>
+                </div>
+            </div> <!-- end container -->
+            <div class="n-shape">
+                <img src="assets/images/nshape1.png" alt="">
+            </div>
+            <div class="n-shape2">
+                <img src="assets/images/nshape2.png" alt="">
+            </div>
+        </section>
+        <!-- end wpo-newslatter-section -->
+       </html>
+       {% endblock %}

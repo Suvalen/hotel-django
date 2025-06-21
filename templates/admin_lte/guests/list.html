@@ -1,0 +1,48 @@
+{% extends 'admin_lte/base.html' %}
+{% block content %}
+<div class="main-panel">
+  <div class="content-wrapper">
+    <div class="col-lg-12 grid-margin stretch-card">
+      <div class="card">
+        <div class="card-body">
+          <a href="{% url 'export-guests-csv' %}" class="btn btn-success btn-sm mb-3">
+            <i class="bi bi-download"></i> Download Guests CSV
+          </a>
+          
+          <h2 class="card-title">Guests</h2>
+          <a href="{% url 'guest-add' %}" class="btn btn-primary mb-3">+ Add Guest</a>
+          <div class="table-responsive">
+            <table class="table table-bordered">
+             <thead>
+                <tr>
+                <th>#</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Phone</th>
+               
+                <th>Actions</th>
+               </tr>
+              </thead>
+              <tbody>
+                {% for guest in guests %}
+              <tr>
+                <td>{{ forloop.counter }}</td>
+                <td>{{ guest.name }}</td>
+                <td>{{ guest.email }}</td>
+                <td>{{ guest.phone }}</td>
+                
+                <td>
+                  <a href="{% url 'guest-edit' guest.pk %}" class="btn btn-sm btn-info">Edit</a>
+                  <a href="{% url 'guest-delete' guest.pk %}" class="btn btn-sm btn-danger">Delete</a>
+                </td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+{% endblock %}

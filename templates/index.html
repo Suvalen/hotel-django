@@ -1,0 +1,632 @@
+
+{% load static %}
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="author" content="wpOceans">
+        <link rel="shortcut icon" type="image/png" href="{% static '/images/favicon.png'%}">
+        <title>Parador - Hotel Booking HTML5 Template</title>
+        <link href="{% static 'css/themify-icons.css'%}" rel="stylesheet">
+        <link href="{% static 'css/font-awesome.min.css' %}" rel="stylesheet">
+        <link href="{% static 'css/flaticon.css' %}" rel="stylesheet">
+        <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+        <link href="{% static 'css/animate.css' %}" rel="stylesheet">
+        <link href="{% static 'css/owl.carousel.css' %}" rel="stylesheet">
+        <link href="{% static 'css/owl.theme.css' %}" rel="stylesheet">
+        <link href="{% static 'css/slick.css' %}" rel="stylesheet">
+        <link href="{% static 'css/slick-theme.css' %}" rel="stylesheet">
+        <link href="{% static 'css/swiper.min.css' %}" rel="stylesheet">
+        <link href="{% static 'css/owl.transitions.css' %}" rel="stylesheet">
+        <link href="{% static 'css/jquery.fancybox.css' %}" rel="stylesheet">
+        <link href="{% static 'css/odometer-theme-default.css'%}" rel="stylesheet">
+        <link href="{% static 'css/jquery-ui.css'%}" rel="stylesheet">
+        <link href="{% static 'css/style.css'%}" rel="stylesheet">
+    </head>
+    <!-- start page-wrapper -->
+    <div class="page-wrapper">
+        <!-- start preloader -->
+        <div class="preloader">
+            <div class="vertical-centered-box">
+                <div class="content">
+                    <div class="loader-circle"></div>
+                    <div class="loader-line-mask">
+                        <div class="loader-line"></div>
+                    </div>
+                    <img src="assets/images/preloader.png" alt="">
+                </div>
+            </div>
+        </div>
+        <!-- end preloader -->
+        <!-- Start header -->
+        <header id="header">
+            <div class="wpo-site-header wpo-header-style-2">
+                <div class="topbar">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col col-lg-7 col-md-8 col-sm-12 col-12">
+                                <div class="contact-intro">
+                                
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div> <!-- end topbar -->
+                <nav class="navigation navbar navbar-expand-lg navbar-light">
+                    <div class="container-fluid">
+                        <div class="row align-items-center">
+                            <div class="col-lg-3 col-md-3 col-3 d-lg-none dl-block">
+                                <div class="mobail-menu">
+                                    <button type="button" class="navbar-toggler open-btn">
+                                        <span class="sr-only">Toggle navigation</span>
+                                        <span class="icon-bar first-angle"></span>
+                                        <span class="icon-bar middle-angle"></span>
+                                        <span class="icon-bar last-angle"></span>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="col-lg-2 col-md-6 col-6">
+                                <div class="navbar-header">
+                                    <a class="navbar-brand" href="index.html">
+                                        <img src="{%static '/images/logo.png'%}" alt="">
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="col-lg-9 col-md-1 col-1">
+                                <div id="navbar" class="collapse navbar-collapse navigation-holder">
+                                    <button class="menu-close"><i class="ti-close"></i></button>
+                                    <ul class="nav navbar-nav mb-2 mb-lg-0">
+                                        <li class="menu-item-has-children">
+                                            <a class="active" href="{% url 'home' %}">Home</a>
+                                        
+                                        </li>
+                                        <li><a href="{% url 'about' %}">About</a></li>
+                                        <li class="menu-item-has-children">
+                                            <a href="{% url 'room_page'%}">Room</a>
+                                        </li>
+                                        <li class="menu-item-has-children">
+                                            
+                                                <a href="{% url 'destination-list' %}" class="nav-link {% if request.resolver_match.url_name == 'destination_page' %}active{% endif %}">Destination</a>
+                                           
+                                           
+                                        </li>
+                                        
+
+                                        <li class="menu-item-has-children">
+                                            <a href="#">Shop</a>
+                                            <ul class="sub-menu">
+                                                <a href="{% url 'shop' %}" class="nav-link {% if request.resolver_match.url_name == 'shop' %}active{% endif %}">Shop</a>
+                                                
+                                                <a href="{% url 'cart' %}" class="nav-link {% if request.resolver_match.url_name == 'cart' %}active{% endif %}">Cart</a>
+                                                <li><a href="{% url 'check_out'%}">Checkout</a></li>
+                                            </ul>
+                                        </li>
+                                        <li><a href="{% url 'contact' %}" class="nav-link {% if request.resolver_match.url_name == 'contact' %}active{% endif %}">Contact</a></li>
+                                    
+                                    {% if request.session.user_id %}
+                                    <li class="menu-item-has-children"><a href="{% url 'user-logout' %}">Logout</a></li>
+                                    {% endif %}
+                                    {% if not request.session.user_id %}
+                                <li class="menu-item-has-children">
+                                <a href="{% url 'user-login' %}">Login</a>
+                                </li>
+                              {% endif %}
+                            </ul>
+                                </div><!-- end of nav-collapse -->
+                            </div>
+                            <div class="col-lg-1 col-md-2 col-2">
+                                <div class="header-right">
+                                    <div class="header-search-form-wrapper">
+                                        <div class="cart-search-contact">
+                                            <button class="search-toggle-btn"><i
+                                                    class="fi flaticon-search"></i></button>
+                                            <div class="header-search-form">
+                                                <form>
+                                                    <div>
+                                                        <input type="text" class="form-control"
+                                                            placeholder="Search here...">
+                                                        <button type="submit"><i
+                                                                class="fi flaticon-search"></i></button>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="mini-cart">
+                                        
+                                        <div class="mini-cart-content">
+                                            <button class="mini-cart-close"><i class="ti-close"></i></button>
+                                            <div class="mini-cart-items">
+                                                <div class="mini-cart-item clearfix">
+                                                    <div class="mini-cart-item-image">
+                                                        <a href="shop.html"><img
+                                                                src="assets/images/shop/mini-cart/img-1.jpg" alt></a>
+                                                    </div>
+                                                    <div class="mini-cart-item-des">
+                                                        <a href="shop.html">Justo mauris dictumst</a>
+                                                        <span class="mini-cart-item-price">$20.15 x 1</span>
+                                                        <span class="mini-cart-item-quantity"><a href="#"><i
+                                                                    class="ti-close"></i></a></span>
+                                                    </div>
+                                                </div>
+                                                <div class="mini-cart-item clearfix">
+                                                    <div class="mini-cart-item-image">
+                                                        <a href="shop.html"><img
+                                                                src="assets/images/shop/mini-cart/img-2.jpg" alt></a>
+                                                    </div>
+                                                    <div class="mini-cart-item-des">
+                                                        <a href="shop.html">Senec metus convallis</a>
+                                                        <span class="mini-cart-item-price">$13.25 x 2</span>
+                                                        <span class="mini-cart-item-quantity"><a href="#"><i
+                                                                    class="ti-close"></i></a></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="mini-cart-action clearfix">
+                                                <span class="mini-checkout-price">Subtotal: <span>$215.14</span></span>
+                                                <div class="mini-btn">
+                                                    <a href="checkout.html" class="view-cart-btn s1">Checkout</a>
+                                                    <a href="cart.html" class="view-cart-btn">View Cart</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div><!-- end of container -->
+                </nav>
+            </div>
+        </header>
+        
+        <!-- start of hero -->
+        <section class="wpo-hero-slider">
+            <div class="swiper-container">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide">
+                        <div class="slide-inner slide-bg-image" data-background="{%static "/images/slider/visualsofdana-T5pL6ciEn-I-unsplash.jpg"%}">
+                            <!-- <div class="gradient-overlay"></div> -->
+                            <div class="container-fluid">
+                                <div class="slide-content">
+                                    <div data-swiper-parallax="300" class="slide-title">
+                                        <h2>Find Your Perfect Place To Stay</h2>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                    <div data-swiper-parallax="500" class="slide-btns">
+                                        <a href="{% url 'room_page'%}" class="theme-btn">Book Now</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div> <!-- end slide-inner -->
+                    </div> <!-- end swiper-slide -->
+                    <div class="swiper-slide">
+                        <div class="slide-inner slide-bg-image" data-background="{%static "/images/slider/isaac-quesada-xc4oxgAbDmw-unsplash.jpg"%}">
+                            <!-- <div class="gradient-overlay"></div> -->
+                            <div class="container-fluid">
+                                <div class="slide-content">
+                                    <div data-swiper-parallax="300" class="slide-title">
+                                        <h2>Find Your Perfect Place To Stay</h2>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                    <div data-swiper-parallax="500" class="slide-btns">
+                                        <a href="{% url 'room_page'%}" class="theme-btn">Book Now</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div> <!-- end slide-inner -->
+                    </div> <!-- end swiper-slide -->
+                    <div class="swiper-slide">
+                        <div class="slide-inner slide-bg-image" data-background="{% static "/images/slider/doan-anh-rEDLD7bjm68-unsplash.jpg"%}">
+                            <!-- <div class="gradient-overlay"></div> -->
+                            <div class="container-fluid">
+                                <div class="slide-content">
+                                    <div data-swiper-parallax="300" class="slide-title">
+                                        <h2>Find Your Perfect Place To Stay</h2>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                    <div data-swiper-parallax="500" class="slide-btns">
+                                        <a href="{% url 'room_page'%}" class="theme-btn">Book Now</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div> <!-- end slide-inner -->
+                    </div> <!-- end swiper-slide -->
+                </div>
+                <!-- end swiper-wrapper -->
+
+                <!-- swipper controls -->
+                <div class="swiper-pagination"></div>
+                <div class="swiper-button-next"></div>
+                <div class="swiper-button-prev"></div>
+            </div>
+        </section>
+        <!-- end of wpo-hero-slide-section-->
+
+      <!-- search-area-start -->
+<div class="wpo-select-section">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="wpo-select-wrap">
+            <div class="wpo-select-area">
+              <form method="get" action="{% url 'room-search' %}" class="clearfix">
+  
+                <!-- Check In -->
+                <div class="select-sub">
+                  <div class="input-group date">
+                    <input type="text" id="datepicker" name="checkin" placeholder="Check in" autocomplete="off">
+                    <i class="fi flaticon-calendar"></i>
+                  </div>
+                </div>
+  
+                <!-- Check Out -->
+                <div class="select-sub">
+                  <div class="input-group date">
+                    <input type="text" id="datepicker2" name="checkout" placeholder="Check Out" autocomplete="off">
+                    <i class="fi flaticon-calendar"></i>
+                  </div>
+                </div>
+  
+                <!-- Room Type -->
+                <div class="select-sub">
+                    <div class="input-group">
+                      <i class="fi flaticon-user"></i>
+                      <select name="room_type" class="form-control">
+                        <option value="">-- Select Room Type --</option>
+                        {% for key, label in room_types.items %}
+                          <option value="{{ key }}" {% if selected_room_type == key %}selected{% endif %}>
+                            {{ label }}
+                          </option>
+                        {% endfor %}
+                      </select>
+                      
+                      
+                    </div>
+                  </div>
+                  
+  
+                <!-- Submit -->
+                <div class="select-sub">
+                  <button class="theme-btn" type="submit">Check Availability</button>
+                </div>
+  
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- search-area-end -->
+  
+                                  
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- serch-area-end -->
+        
+        <!-- start of wpo-about-section -->
+        <section class="wpo-about-section-s2 section-padding">
+            <div class="container-fluid">
+                <div class="wpo-about-section-wrapper">
+                    <div class="row align-items-center">
+                        <div class="col-xl-5 col-lg-6 col-md-8 col-12 offset-xl-6 offset-lg-4 offset-md-2">
+                            <div class="wpo-about-content">
+                                <div class="about-title">
+                                    <span>Exclusive Offer</span>
+                                    <h2>Enjoy Your Dream Vacation In switzerland</h2>
+                                </div>
+                                <div class="wpo-about-content-inner">
+                                    <div class="about-info-wrap">
+                                        <div class="about-info-left">
+                                            <p>2 Days / 3 Night</p>
+                                            <ul>
+                                                <li><i class="fa fa-star" aria-hidden="true"></i></li>
+                                                <li><i class="fa fa-star" aria-hidden="true"></i></li>
+                                                <li><i class="fa fa-star" aria-hidden="true"></i></li>
+                                                <li><i class="fa fa-star" aria-hidden="true"></i></li>
+                                                <li><span><i class="fa fa-star" aria-hidden="true"></i></span></li>
+                                            </ul>
+                                        </div>
+                                        <div class="about-info-right">
+                                            <p>Only</p>
+                                            <h3>$250</h3>
+                                        </div>
+                                        <a href="{% url 'room_page'%}" class="theme-btn">Book Now</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- end of wpo-about-section -->
+        <!-- start wpo-fun-fact-section -->
+        <section class="wpo-fun-fact-section-s2 section-padding">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col col-xs-12">
+                        <div class="wpo-fun-fact-grids clearfix">
+                            <div class="grid">
+                                <div class="info">
+                                    <h3><span class="odometer" data-count="302">00</span>+</h3>
+                                    <p>Room & Suites</p>
+                                </div>
+                            </div>
+                            <div class="grid">
+                                <div class="info">
+                                    <h3><span class="odometer" data-count="25">00</span></h3>
+                                    <p>Restaurant</p>
+                                </div>
+                            </div>
+                            <div class="grid">
+                                <div class="info">
+                                    <h3><span class="odometer" data-count="510">00</span>+</h3>
+                                    <p>Exceptional Food</p>
+                                </div>
+                            </div>
+                            <div class="grid">
+                                <div class="info">
+                                    <h3><span class="odometer" data-count="65">00</span></h3>
+                                    <p>Destination</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div> <!-- end container -->
+        </section>
+        <!-- end wpo-fun-fact-section -->
+        <!-- wpo-destination-area-start -->
+        
+                <!-- wpo-destination-area-start -->
+<div class="wpo-destination-area">
+    <div class="container">
+      <div class="wpo-section-title">
+        <div class="row align-items-center justify-content-between">
+          <div class="col-xl-6 col-md-8">
+            <div class="wpo-section-title-left">
+              <h2>Our Most Popular Destinations</h2>
+              <p>Explore top destinations near our hotel, handpicked for your comfort and enjoyment.</p>
+            </div>
+          </div>
+          <div class="col-xl-6 col-md-4">
+            <div class="btns">
+              <a href="{% url 'destination-list' %}" tabindex="0">View All</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="destination-wrap">
+        <div class="row">
+          {% for dest in destinations %}
+          <div class="col-lg-4 col-md-6 col-12">
+            <div class="destination-item">
+              <div class="destination-img">
+                {% if dest.image %}
+                  <img src="{{ dest.image.url }}" alt="{{ dest.name }}">
+                {% else %}
+                  <img src="{% static 'images/destination/default.jpg' %}" alt="Default Destination">
+                {% endif %}
+              </div>
+              <div class="destination-content">
+                <span class="sub">{{ dest.location }}</span>
+                <h2><a href="#">{{ dest.name }}</a></h2>
+                <p>{{ dest.description|truncatechars:80 }}</p>
+                <div class="destination-bottom">
+                  <p>{{ dest.distance_km }} km from hotel</p>
+                  <div class="destination-bottom-right">
+                    <ul>
+                      <li><i class="fa fa-star"></i></li>
+                      <li><i class="fa fa-star"></i></li>
+                      <li><i class="fa fa-star"></i></li>
+                      <li><i class="fa fa-star"></i></li>
+                      <li><i class="fa fa-star-o"></i></li>
+                    </ul>
+                    <small>4.5</small>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- wpo-destination-area-end -->
+  
+            </div>
+        </div>
+        <!-- .Destination-area-start -->
+
+        <!-- wpo-service-area-start -->
+        <div class="wpo-service-area-s2">
+            <div class="wpo-service-wrap">
+                <div class="container-fluid">
+                    <div class="row align-items-center">
+                        <div class="col-xl-12 col-12">
+                            <div class="wpo-service-items wpo-service-active owl-carousel">
+                                <div class="wpo-service-item">
+                                    <div class="wpo-service-img">
+                                        <img src="{% static '/images/service/img-1.jpg'%}" alt="">
+                                    </div>
+                                    <div class="wpo-service-text">
+                                        <i class="fi flaticon-food-tray"></i>
+                                        <a href="service.html">Delicious Food</a>
+                                    </div>
+                                </div>
+                                <div class="wpo-service-item">
+                                    <div class="wpo-service-img">
+                                        <img src="assets/images/service/img-2.jpg" alt="">
+                                    </div>
+                                    <div class="wpo-service-text">
+                                        <i class="fi flaticon-parking"></i>
+                                        <a href="service.html">Parking Area</a>
+                                    </div>
+                                </div>
+                                <div class="wpo-service-item">
+                                    <div class="wpo-service-img">
+                                        <img src="/images/service/img-3.jpg" alt="">
+                                    </div>
+                                    <div class="wpo-service-text">
+                                        <i class="fi flaticon-swimmer"></i>
+                                        <a href="service.html">Swimming Pool</a>
+                                    </div>
+                                </div>
+                                <div class="wpo-service-item">
+                                    <div class="wpo-service-img">
+                                        <img src="assets/images/service/img-4.jpg" alt="">
+                                    </div>
+                                    <div class="wpo-service-text">
+                                        <i class="fi flaticon-mortar"></i>
+                                        <a href="service.html">Spa Salon</a>
+                                    </div>
+                                </div>
+                                <div class="wpo-service-item">
+                                    <div class="wpo-service-img">
+                                        <img src="assets/images/service/img-5.jpg" alt="">
+                                    </div>
+                                    <div class="wpo-service-text">
+                                        <i class="fi flaticon-dumbell"></i>
+                                        <a href="service.html">Exercise Space</a>
+                                    </div>
+                                </div>
+                                <div class="wpo-service-item">
+                                    <div class="wpo-service-img">
+                                        <img src="assets/images/service/img-6.jpg" alt="">
+                                    </div>
+                                    <div class="wpo-service-text">
+                                        <i class="fi flaticon-wifi"></i>
+                                        <a href="service.html">Free Wifi</a>
+                                    </div>
+                                </div>
+                                <div class="wpo-service-item">
+                                    <div class="wpo-service-img">
+                                        <img src="assets/images/service/img-7.jpg" alt="">
+                                    </div>
+                                    <div class="wpo-service-text">
+                                        <i class="fi flaticon-cappuccino"></i>
+                                        <a href="service.html">Breakfast</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- .service-area-start -->
+
+        
+        <!-- start of wpo-site-footer-section -->
+        <footer class="wpo-site-footer">
+            <div class="wpo-upper-footer">
+                <div class="container">
+                    <div class="row">
+                        <div class="col col-lg-3 col-md-6 col-sm-12 col-12">
+                            <div class="widget about-widget">
+                                <div class="logo widget-title">
+                                    <img src="{% static '/images/logo.png'%}" alt="blog">
+                                </div>
+                                <p>Management consulting includes a broad range of activities, and the many firms and
+                                    their members often define these practices.</p>
+                                <ul>
+                                    <li>
+                                        <a href="#">
+                                            <i class="ti-facebook"></i>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#">
+                                            <i class="ti-twitter-alt"></i>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#">
+                                            <i class="ti-instagram"></i>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#">
+                                            <i class="ti-google"></i>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col col-lg-3 col-md-6 col-sm-12 col-12">
+                            <div class="widget link-widget s1">
+                                <div class="widget-title">
+                                    <h3>Services</h3>
+                                </div>
+                                <ul>
+                                    <li><a href="service-single.html">Delicious Food</a></li>
+                                    <li><a href="service-single.html">Parking Area</a></li>
+                                    <li><a href="service-single.html">Free Wifi</a></li>
+                                    <li><a href="service-single.html">Swimming Pool</a></li>
+                                    <li><a href="service-single.html">Spa Salon</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col col-lg-3 col-md-6 col-sm-12 col-12">
+                            <div class="widget link-widget">
+                                <div class="widget-title">
+                                    <h3>Important Link</h3>
+                                </div>
+                                <ul>
+                                    <li><a href="about.html">About Us</a></li>
+                                    <li><a href="destination.html">Populer Destinition</a></li>
+                                    <li><a href="room.html">Awesome Rooms</a></li>
+                                    <li><a href="service.html">Our Services</a></li>
+                                    <li><a href="pricing.html">Pricing Plan</a></li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="col col-lg-3 col-md-6 col-sm-12 col-12">
+                            <div class="widget wpo-service-link-widget">
+                                <div class="widget-title">
+                                    <h3>Contact </h3>
+                                </div>
+                                <div class="contact-ft">
+                                    <ul>
+                                        <li><i class="fi flaticon-placeholder"></i>7 Green Lake Street Crawfordsville,
+                                            IN
+                                            47933</li>
+                                        <li><i class="fi flaticon-phone-call"></i>+1 800 123 456 789</li>
+                                        <li><i class="fi flaticon-send"></i>parador@gmail.com</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div> <!-- end container -->
+            </div>
+            <div class="wpo-lower-footer">
+                <div class="container">
+                    <div class="row">
+                        <div class="col col-xs-12">
+                            <p class="copyright"> Copyright &copy; 2021 Parador by <a href="index.html">wpOceans</a>.
+                                All Rights Reserved.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+   
+
+        <script src="{% static "js/jquery.min.js"%}"></script>
+        <script src="{% static "/js/bootstrap.bundle.min.js"%}"></script>
+        <!-- Plugins for this template -->
+        <script src="{% static " /js/modernizr.custom.js"%}"></script>
+        <script src="{% static "/js/jquery-plugin-collection.js"%}"></script>
+        <!-- Custom script for this template -->
+        <script src="{% static "/js/script.js"%}"></script>
+   

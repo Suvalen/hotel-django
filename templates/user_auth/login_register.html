@@ -1,0 +1,85 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Guest Login / Register</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,100,300,500,700,900&subset=latin,latin-ext">
+  <link rel="stylesheet" href="{% static 'css/login-register/style.css' %}">
+</head>
+<body>
+
+<div class="materialContainer">
+
+  <!-- Login Box -->
+  <div class="box">
+    <div class="title">LOGIN</div>
+
+    <form method="post" action="">
+      {% csrf_token %}
+      <input type="hidden" name="form_type" value="login">
+      {% if login_form.non_field_errors %}
+        <p style="color:red;">{{ login_form.non_field_errors }}</p>
+      {% endif %}
+      <div class="input">
+        <label for="login_username">Username</label>
+        {{ login_form.username }}
+        <span class="spin"></span>
+      </div>
+
+      <div class="input">
+        <label for="login_password">Password</label>
+        {{ login_form.password }}
+        <span class="spin"></span>
+      </div>
+
+      <div class="button login">
+        <button type="submit"><span>GO</span> <i class="fa fa-check"></i></button>
+      </div>
+    </form>
+
+    <a href="#" class="pass-forgot">Forgot your password?</a>
+  </div>
+
+  <!-- Register Overbox -->
+  <div class="overbox">
+    <div class="material-button alt-2"><span class="shape"></span></div>
+    <div class="title">REGISTER</div>
+
+    <form method="post" action="">
+      {% csrf_token %}
+      <input type="hidden" name="form_type" value="register">
+      {% if register_form.non_field_errors %}
+        <p style="color:red;">{{ register_form.non_field_errors }}</p>
+      {% endif %}
+      <div class="input">
+        <label for="reg_username">Username</label>
+        {{ register_form.username }}
+        <span class="spin"></span>
+      </div>
+
+      <div class="input">
+        <label for="reg_email">Email</label>
+        {{ register_form.email }}
+        <span class="spin"></span>
+      </div>
+
+      <div class="input">
+        <label for="reg_password">Password</label>
+        {{ register_form.password }}
+        <span class="spin"></span>
+      </div>
+
+      <div class="button">
+        <button type="submit"><span>REGISTER</span></button>
+      </div>
+    </form>
+  </div>
+
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script src="{% static 'js/login-register/script.js' %}"></script>
+</body>
+</html>

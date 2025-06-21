@@ -1,0 +1,136 @@
+{% extends "base.html" %}
+{% load static %}
+<html lang="en">
+
+{% block title %}Room Details{% endblock %}
+{% block content %}
+<body>
+    <!-- start page-wrapper -->
+    <div class="page-wrapper">
+        <!-- start preloader -->
+        <div class="preloader">
+            <div class="vertical-centered-box">
+                <div class="content">
+                    <div class="loader-circle"></div>
+                    <div class="loader-line-mask">
+                        <div class="loader-line"></div>
+                    </div>
+                    <img src="{% static '/images/preloader.png'%}" alt="">
+                </div>
+            </div>
+        </div>
+        <!-- end preloader -->
+       
+        <!-- start of breadcumb-section -->
+        <div class="wpo-breadcumb-area">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="wpo-breadcumb-wrap">
+                            <h2>Room</h2>
+                            <ul>
+                                <li><a href="{%url 'home'%}">Home</a></li>
+                                <li><span>Room</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- end of wpo-breadcumb-section-->
+        <!-- wpo-room-area-start -->
+        <div class="wpo-room-area section-bg section-padding">
+            <div class="container">
+                <div class="room-wrap">
+
+
+                    <div class="row">
+                        {% for room in grouped_rooms %}
+                        <div class="col-lg-4 col-md-6 col-12">
+                          <div class="room-item">
+                            <div class="room-img">
+                                <img src="{% static 'room_images/' %}{{ room.type_key }}.jpg" alt="{{ room.type_label }}">
+                                <!-- Optional: Make dynamic -->
+                            </div>
+                            <div class="room-content">
+                                <h2>{{ room.type_label }}</h2>
+                              
+                                {% if room.available %}
+                                  <a href="{% url 'book-room' room.type_key %}" class="theme-btn">Book Now</a>
+                                {% endif %}
+                              
+                                <ul>
+                                  <li><i class="fi flaticon-expand-arrows"></i>{{ room.specs.size }}</li>
+                                  <li><i class="fi flaticon-bed"></i>{{ room.specs.bed }}</li>
+                                  <li><i class="fi flaticon-bathtub"></i>{{ room.specs.bath }}</li>
+                                </ul>
+                              
+                                {% if room.available %}
+                                  <h3>${{ room.price }} <span>/ Night</span></h3>
+                                {% else %}
+                                  <h3 class="text-danger">Not Available</h3>
+                                {% endif %}
+                              </div>
+                              
+                          </div>
+                        </div>
+                        {% endfor %}
+                      </div>
+                      
+                    
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- .room-area-start -->
+        <!-- start wpo-newslatter-section -->
+        <section class="wpo-newslatter-section section-padding">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-xl-7">
+                        <div class="wpo-section-title-s2">
+                            <h2>Subscribe & Get Special Discount!</h2>
+                            <p>Don’t Wanna Miss Somethings? Subscribe Right Now And Get The Special 
+                                Discount And Monthly Newsletter.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="wpo-newsletter">
+                    <div class="newsletter-form">
+                        <form>
+                            <input type="email" class="form-control"
+                                placeholder="Enter Your Email Address..." required>
+                                <button type="submit">Subscribe</button>
+                        </form>
+                    </div>
+                </div>
+            </div> <!-- end container -->
+            <div class="n-shape">
+                <img src="assets/images/nshape1.png" alt="">
+            </div>
+            <div class="n-shape2">
+                <img src="assets/images/nshape2.png" alt="">
+            </div>
+        </section>
+        <!-- end wpo-newslatter-section -->
+        {% endblock %}
+      
+
+        
+    </div>
+    <!-- end of page-wrapper -->
+
+    <!-- All JavaScript files
+    ================================================== -->
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/js/bootstrap.bundle.min.js"></script>
+    <!-- Plugins for this template -->
+    <script src="assets/js/modernizr.custom.js"></script>
+    <script src="assets/js/jquery.dlmenu.js"></script>
+    <script src="assets/js/jquery-plugin-collection.js"></script>
+    <!-- Custom script for this template -->
+    <script src="assets/js/script.js"></script>
+</body>
+
+</html>

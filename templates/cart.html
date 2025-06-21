@@ -1,0 +1,173 @@
+{% extends "base.html" %}
+{% load static %}
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+{% block content %}
+        <!-- start of breadcumb-section -->
+        <div class="wpo-breadcumb-area">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="wpo-breadcumb-wrap">
+                            <h2>Cart</h2>
+                            <ul>
+                                <li><a href="index.html">Home</a></li>
+                                <li><span>Cart</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- end of wpo-breadcumb-section-->
+        <!-- cart-area start -->
+        <form method="post" action="{% url 'update-cart' %}">
+        <div class="cart-area section-padding">
+            <div class="container">
+                <div class="form">
+                    <div class="cart-wrapper">
+                        <div class="row">
+                            <div class="col-12">
+        
+                                <!-- ✅ Reserved Rooms -->
+                                {% if reservations %}
+                                <div class="mb-5">
+                                    <div class="row justify-content-center">
+                                        <div class="col-lg-8 col-md-10">
+                                            <h4 class="text-center mb-3">Reserved Rooms</h4>
+                                            <ul class="list-unstyled text-center">
+                                                {% for res in reservations %}
+                                                <li class="mb-2">
+                                                    <strong>Room {{ res.room.number }}</strong><br>
+                                                    <small>({{ res.check_in|date:"F j, Y" }} to {{ res.check_out|date:"F j, Y" }})</small>
+                                                </li>
+                                                {% endfor %}
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                {% endif %}
+        
+                                <!-- ✅ Cart Table -->
+                                <form method="post" action="#">
+                                    {% csrf_token %}
+                                    <table class="table-responsive cart-wrap">
+                                        <thead>
+                                            <tr>
+                                                <th>Image</th>
+                                                <th>Product</th>
+                                                <th>Quantity</th>
+                                                <th>Unit Price</th>
+                                                <th>Total</th>
+                                                <th>Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {% for order in product_orders %}
+                                            <tr>
+                                                <td class="images">
+                                                    {% if order.produk.gambar %}
+                                                        <img src="{{ order.produk.gambar.url }}" alt="{{ order.produk.nama_produk }}" width="80">
+                                                    {% else %}
+                                                        <img src="{% static 'parador/images/shop/default.jpg' %}" alt="Default" width="80">
+                                                    {% endif %}
+                                                </td>
+                                                <td class="product">
+                                                    <ul>
+                                                        <li class="first-cart">{{ order.produk.nama_produk }}</li>
+                                                        <li>Category: {{ order.produk.get_kategori_display }}</li>
+                                                    </ul>
+                                                </td>
+                                                <td class="stock">
+                                                    <ul class="input-style">
+                                                        <li class="quantity cart-plus-minus">
+                                                            <input type="text" name="jumlah_{{ order.id }}" value="{{ order.jumlah }}" readonly data-id="{{ order.id }}" />
+
+                                                        </li>
+                                                    </ul>
+                                                </td>
+                                                <td class="ptice">${{ order.produk.harga }}</td>
+                                                <td class="stock">${{ order.total_harga }}</td>
+                                                <td class="action">
+                                                    <ul>
+                                                        <a href="{% url 'delete-order' order.id %}" onclick="return confirm('Remove this item from cart?');">
+                                                            <i class="fi ti-trash"></i>
+                                                        </a>
+                                                        
+                                                    </ul>
+                                                </td>
+                                            </tr>
+                                            {% endfor %}
+                                        </tbody>
+                                    </table>
+        
+                                    <!-- ✅ Cart Buttons -->
+                                    <div class="submit-btn-area">
+                                        <ul>
+                                            <li><a class="theme-btn" href="{% url 'shop' %}">Continue Shopping <i class="fa fa-angle-double-right"></i></a></li>
+                                            <li><button type="submit">Update Cart</button></li>
+                                        </ul>
+                                    </div>
+                                </form>
+                                    <!-- ✅ Cart Totals -->
+                                    <div class="cart-product-list">
+                                        <ul>
+                                            <li>Prodcuts<span>({{ product_orders|length }})</span></li>
+                                            <li>Product Total<span>${{ total_product_price }}</span></li>
+                                            <li>Room Total<span>${{ total_room_price }}</span></li>
+                                            <li class="cart-b">Grand Total<span>${{ grand_total }}</span></li>
+                                        </ul>
+                                    </div>
+        
+                                    <!-- ✅ Proceed to Checkout -->
+                                    <div class="submit-btn-area">
+                                        <ul>
+                                            <li><a class="theme-btn" href="{%url 'check_out'%}">Proceed to Checkout <i class="fa fa-angle-double-right"></i></a></li>
+                                        </ul>
+                                    </div>
+                                </form>
+        
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+
+        <!-- start wpo-newslatter-section -->
+        <section class="wpo-newslatter-section section-bg section-padding">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-xl-7">
+                        <div class="wpo-section-title-s2">
+                            <h2>Subscribe & Get Special Discount!</h2>
+                            <p>Don’t Wanna Miss Somethings? Subscribe Right Now And Get The Special 
+                                Discount And Monthly Newsletter.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="wpo-newsletter">
+                    <div class="newsletter-form">
+                        <form>
+                            <input type="email" class="form-control"
+                                placeholder="Enter Your Email Address..." required>
+                                <button type="submit">Subscribe</button>
+                        </form>
+                    </div>
+                </div>
+            </div> <!-- end container -->
+            <div class="n-shape">
+                <img src="assets/images/nshape1.png" alt="">
+            </div>
+            <div class="n-shape2">
+                <img src="assets/images/nshape2.png" alt="">
+            </div>
+        </section>
+        <!-- end wpo-newslatter-section -->
+        {% endblock %}
+</html>

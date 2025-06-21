@@ -1,0 +1,46 @@
+{% extends 'admin_lte/base.html' %}
+{% block content %}
+<div class="main-panel">
+    <div class="content-wrapper">
+      <div class="col-lg-12 grid-margin stretch-card">
+<div class="card">
+  <div class="card-header">
+    <h3 class="card-title">Cleaning Records</h3>
+    <a href="{% url 'cleaning-add' %}" class="btn btn-primary btn-sm float-end">+ Add</a>
+  </div>
+  <div class="card-body">
+    <table class="table table-bordered table-hover">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Room</th>
+          <th>Staff</th>
+          <th>Date</th>
+          <th>Status</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for c in cleanings %}
+        <tr>
+          <td>{{ forloop.counter }}</td>
+          <td>{{ c.room.number }}</td>
+          <td>{{ c.staff.name }}</td>
+          <td>{{ c.date }}</td>
+          <td>{{ c.status }}</td>
+          <td>
+            <a href="{% url 'cleaning-edit' c.pk %}" class="btn btn-sm btn-info">Edit</a>
+            <a href="{% url 'cleaning-delete' c.pk %}" class="btn btn-sm btn-danger">Delete</a>
+          </td>
+        </tr>
+        {% empty %}
+        <tr><td colspan="6">No records found.</td></tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+</div>
+</div>
+</div>
+{% endblock %}

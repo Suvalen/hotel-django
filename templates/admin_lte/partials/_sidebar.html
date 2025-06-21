@@ -1,0 +1,118 @@
+{% load static %}
+
+<nav class="sidebar sidebar-offcanvas" id="sidebar">
+
+  <div class="sidebar-brand-wrapper d-none d-lg-flex align-items-center justify-content-center fixed-top">
+    <a class="sidebar-brand brand-logo" href="{% url 'dashboard' %}">
+      <img src="{% static '/images/logo.png' %}" alt="logo" />
+    </a>
+    <a class="sidebar-brand brand-logo-mini" href="{% url 'dashboard' %}">
+      <img src="{% static '/images/logo.png' %}" alt="logo" />
+    </a>
+  </div>
+
+  <ul class="nav">
+   
+
+    <li class="nav-item nav-category">
+      <span class="nav-link">Navigation</span>
+    </li>
+
+    <li class="nav-item menu-items">
+      <a class="nav-link" href="{% url 'dashboard' %}">
+        <span class="menu-icon">
+          <i class="mdi mdi-speedometer"></i>
+        </span>
+        <span class="menu-title">Dashboard</span>
+      </a>
+    </li>
+
+    <li class="nav-item menu-items">
+      <a class="nav-link" data-bs-toggle="collapse" href="#menu-guest" aria-expanded="false" aria-controls="menu-guest">
+        <span class="menu-icon"><i class="mdi mdi-account-multiple"></i></span>
+        <span class="menu-title">Guest Management</span>
+        <i class="menu-arrow"></i>
+      </a>
+      <div class="collapse" id="menu-guest">
+        <ul class="nav flex-column sub-menu">
+          <li class="nav-item"><a class="nav-link" href="{% url 'guest-dashboard' %}">Guests</a></li>
+          <li class="nav-item"><a class="nav-link" href="{% url 'reservation-dashboard' %}">Reservations</a></li>
+          <li class="nav-item"><a class="nav-link" href="{% url 'payment-dashboard' %}">Payments</a></li>
+          <li class="nav-item"><a class="nav-link" href="{% url 'invoice-dashboard' %}">Invoices</a></li>
+          <li class="nav-item"><a class="nav-link" href="{% url 'occupancy-snapshot-list' %}">Occupancies</a></li>
+        </ul>
+      </div>
+    </li>
+    
+    <li class="nav-item menu-items">
+      <a class="nav-link" data-bs-toggle="collapse" href="#menu-rooms" aria-expanded="false" aria-controls="menu-rooms">
+        <span class="menu-icon"><i class="mdi mdi-hotel"></i></span>
+        <span class="menu-title">Room Services</span>
+        <i class="menu-arrow"></i>
+      </a>
+      <div class="collapse" id="menu-rooms">
+        <ul class="nav flex-column sub-menu">
+          <li class="nav-item"><a class="nav-link" href="{% url 'room-dashboard' %}">Rooms</a></li>
+          <li class="nav-item"><a class="nav-link" href="{% url 'cleaning-list' %}">Cleaning</a></li>
+          <li class="nav-item"><a class="nav-link" href="{% url 'staff-dashboard' %}">Staff</a></li>
+          <li class="nav-item"><a class="nav-link" href="{% url 'maintenance-list' %}">Maintenance</a></li>
+          <li class="nav-item"><a class="nav-link" href="{% url 'roomservice-list' %}">Room Services</a></li>
+        </ul>
+      </div>
+    </li>
+    
+    <li class="nav-item menu-items">
+      <a class="nav-link" data-bs-toggle="collapse" href="#menu-shop" aria-expanded="false" aria-controls="menu-shop">
+        <span class="menu-icon"><i class="mdi mdi-cart-outline"></i></span>
+        <span class="menu-title">Shop</span>
+        <i class="menu-arrow"></i>
+      </a>
+      <div class="collapse" id="menu-shop">
+        <ul class="nav flex-column sub-menu">
+          <li class="nav-item"><a class="nav-link" href="{% url 'product-list' %}">Product List</a></li>
+          <li class="nav-item"><a class="nav-link" href="{% url 'order-list' %}">Order List</a></li>
+          <li class="nav-item"><a class="nav-link" href="{% url 'coupon-dashboard' %}">Coupons</a></li>
+          <li class="nav-item"><a class="nav-link" href="{% url 'confirmed-orders' %}">Completed Orders</a></li>
+        </ul>
+      </div>
+    </li>
+    
+    <li class="nav-item menu-items">
+      <a class="nav-link" data-bs-toggle="collapse" href="#menu-admin" aria-expanded="false" aria-controls="menu-admin">
+        <span class="menu-icon"><i class="mdi mdi-shield-account"></i></span>
+        <span class="menu-title">Administration</span>
+        <i class="menu-arrow"></i>
+      </a>
+      <div class="collapse" id="menu-admin">
+        <ul class="nav flex-column sub-menu">
+          <li class="nav-item"><a class="nav-link" href="{% url 'website-users' %}">Web Users</a></li>
+          <li class="nav-item"><a class="nav-link" href="{% url 'contact-messages' %}">Messages</a></li>
+          <li class="nav-item"><a class="nav-link" href="{% url 'feedback-list' %}">Feedbacks</a></li>
+        </ul>
+      </div>
+    </li>
+    
+    <li class="nav-item menu-items">
+      <a class="nav-link" href="{% url 'destination-dashboard' %}">
+        <span class="menu-icon"><i class="mdi mdi-map-marker-radius"></i></span>
+        <span class="menu-title">Destinations</span>
+      </a>
+    </li>
+
+    <li class="nav-item menu-items">
+      <a class="nav-link" href="{% url 'predict_guest_cluster' %}">
+        <span class="menu-icon"><i class="mdi mdi-map-marker-radius"></i></span>
+        <span class="menu-title">Predic Customer</span>
+      </a>
+    </li>
+    
+    <li class="nav-item menu-items">
+      <a class="nav-link" href="{% url 'guest_cluster_results' %}">
+        <span class="menu-icon"><i class="mdi mdi-map-marker-radius"></i></span>
+        <span class="menu-title">2024 Customer Demographics</span>
+      </a>
+    </li>
+    
+  
+  </ul>
+</nav>

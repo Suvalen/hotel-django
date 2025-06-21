@@ -1,0 +1,170 @@
+{% extends "base.html" %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+{% block content %}
+<body>
+        <!-- start of breadcumb-section -->
+        <div class="wpo-breadcumb-area">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="wpo-breadcumb-wrap">
+                            <h2>Checkout</h2>
+                            <ul>
+                                <li><a href="index.html">Home</a></li>
+                                <li><span>Checkout</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- end of wpo-breadcumb-section-->
+
+        <!-- wpo-checkout-area start-->
+        <div class="wpo-checkout-area section-padding">
+            <div class="container">
+                
+                    <div class="checkout-wrap">
+                        <div class="row">
+                            <div class="col-lg-8 col-12">
+                                <div class="caupon-wrap s1">
+                                    <div class="coupon coupon-active">
+                                        <label id="toggle1">Have a coupon? Click here to enter your code.</label>
+                                      </div>
+                                      <div class="create-account">
+                                        <span>If you have a coupon code, please apply it</span>
+                                        <form method="post" action="{% url 'checkout' %}">
+                                            {% csrf_token %}
+                                            <input type="hidden" name="form_type" value="coupon">
+                                            <div class="input-wrap">
+                                              <input type="text" name="coupon_code" placeholder="Enter coupon code" required>
+                                              <button type="submit">Apply</button>
+                                            </div>
+                                          </form>
+                                      </div>
+                                      
+                                </div>
+                                <form method="post" action="{% url 'checkout' %}">
+                                    {% csrf_token %}
+                                    <div class="caupon-wrap s2">
+                                      <div class="biling-item">
+                                        <div class="coupon coupon-3">
+                                          <label id="toggle2">Billing Address</label>
+                                        </div>
+                                        <div class="billing-adress" id="open2">
+                                          <div class="contact-form form-style">
+                                            <div class="row">
+                                              <div class="col-lg-6 col-md-12 col-12">
+                                                <label for="fname1">First Name</label>
+                                                <input type="text" id="fname1" name="fname" required />
+                                              </div>
+                                              <div class="col-lg-6 col-md-12 col-12">
+                                                <label for="fname2">Last Name</label>
+                                                <input type="text" id="fname2" name="lname" required />
+                                              </div>
+                                              <div class="col-lg-12 col-md-12 col-12">
+                                                <label for="Adress">Address</label>
+                                                <input type="text" id="Adress" name="address" required />
+                                              </div>
+                                              <div class="col-lg-6 col-md-12 col-12">
+                                                <label for="email4">Email Address</label>
+                                                <input type="email" id="email4" name="email" required />
+                                              </div>
+                                              <div class="col-lg-6 col-md-12 col-12">
+                                                <label for="card">Card Number</label>
+                                                <input type="text" id="card" name="card" maxlength="16" />
+                                              </div>
+                                            </div>
+                                          </div>
+                                  
+                                          <div class="note-area">
+                                            <p>Payment Method</p>
+                                            <select name="payment" class="form-control">
+                                              <option value="card">Credit Card</option>
+                                              <option value="bank">Bank Transfer</option>
+                                              <option value="cash">Cash on Arrival</option>
+                                            </select>
+                                          </div>
+                                  
+                                          <div class="submit-btn-area">
+                                            <ul>
+                                              <li>
+                                                <button class="theme-btn" type="submit">Save & continue</button>
+                                              </li>
+                                            </ul>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </form>
+                                  
+                                  
+                            
+                            </div>
+                            <div class="col-lg-4 col-12">
+                                <div class="cout-order-area">
+                                    <div class="oreder-item ">
+                                        <ul>
+                                            <li class="o-header">Your Order<span>({{ orders|length }})</span></li>
+                                            {% for order in orders %}
+                                            <li>{{ order.produk.nama_produk }} × {{ order.jumlah }} <span>${{ order.total_harga }}</span></li>
+                                            {% endfor %}
+                                            {% for res in reservations %}
+                                            <li>Room {{ res.room.number }} ({{ res.room.room_type|title }}) <span>${{ res.room.price }}</span></li>
+                                            {% endfor %}
+                                            <li class="s-total">
+                                                Sub Total <span>${{ total_price|add:discount|default_if_none:"0"|floatformat:2 }}</span>
+                                              </li>
+                                              
+                                            {% if discount %}
+                                            <li>Discount ({{ applied_coupon.discount_percent }}%) <span>−${{ discount|floatformat:2 }}</span></li>
+                                            {% endif %}
+                                            <li class="o-bottom">Total price <span>${{ total_price|floatformat:2 }}</span></li>
+                                            
+
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <!-- wpo-checkout-area end-->
+        <!-- start wpo-newslatter-section -->
+        <section class="wpo-newslatter-section section-bg section-padding">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-xl-7">
+                        <div class="wpo-section-title-s2">
+                            <h2>Subscribe & Get Special Discount!</h2>
+                            <p>Don’t Wanna Miss Somethings? Subscribe Right Now And Get The Special 
+                                Discount And Monthly Newsletter.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="wpo-newsletter">
+                    <div class="newsletter-form">
+                        <form>
+                            <input type="email" class="form-control"
+                                placeholder="Enter Your Email Address..." required>
+                                <button type="submit">Subscribe</button>
+                        </form>
+                    </div>
+                </div>
+            </div> <!-- end container -->
+            <div class="n-shape">
+                <img src="assets/images/nshape1.png" alt="">
+            </div>
+            <div class="n-shape2">
+                <img src="assets/images/nshape2.png" alt="">
+            </div>
+        </section>
+        <!-- end wpo-newslatter-section -->
+</body>
+{% endblock %}
+</html>

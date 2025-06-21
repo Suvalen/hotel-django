@@ -1,0 +1,17 @@
+{% extends 'admin_lte/base.html' %}
+{% block content %}
+<div class="main-panel">
+    <div class="content-wrapper">
+<div class="container mt-5">
+  <h2>Delete Invoice</h2>
+  <p>Are you sure you want to delete invoice <strong>#{{ object.id }}</strong> ({{ object.billing_name }})?</p>
+  <form method="post">
+    {% csrf_token %}
+    <a href="{% url 'invoice-dashboard' %}" class="btn btn-secondary">Cancel</a>
+    <button type="submit" class="btn btn-danger">Confirm Delete</button>
+  </form>
+</div>
+</div>
+</div>
+    
+{% endblock %}

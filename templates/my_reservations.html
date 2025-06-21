@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>My Reservations</h2>
+<table class="table">
+  <thead><tr><th>Room</th><th>Check In</th><th>Check Out</th></tr></thead>
+  <tbody>
+    {% for r in reservations %}
+    <tr>
+      <td>{{ r.room.number }}</td>
+      <td>{{ r.check_in }}</td>
+      <td>{{ r.check_out }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Invoice PDF</title>
+</head>
+<body style="font-family: Arial, sans-serif;">
+    <h2>Invoice #{{ invoice.id }}</h2>
+    <p><strong>Name:</strong> {{ invoice.billing_name }}</p>
+    <p><strong>Email:</strong> {{ invoice.billing_email }}</p>
+    <p><strong>Address:</strong> {{ invoice.billing_address }}</p>
+    <p><strong>Total:</strong> $ {{ invoice.total_amount }}</p>
+    <p><strong>Payment Method:</strong> {{ invoice.payment_method }}</p>
+    {% if invoice.card_last_digits %}
+        <p><strong>Card Ending:</strong> **** {{ invoice.card_last_digits }}</p>
+    {% endif %}
+</body>
+</html>
